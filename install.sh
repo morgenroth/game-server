@@ -10,7 +10,8 @@ fi
 # teamspeak
 mkdir -p /data/teamspeak
 [ -e '/data/teamspeak/ts3server.sqlitedb' ] || touch /data/teamspeak/ts3server.sqlitedb
-mkdir -p /data/logs
+mkdir -p /data/teamspeak/logs
+chown -R 503:503 /data/teamspeak
 
 [ -e '/data/teamspeak/query_ip_whitelist.txt' ] || touch /data/teamspeak/query_ip_whitelist.txt
 [ -e '/data/teamspeak/query_ip_blacklist.txt' ] || touch /data/teamspeak/query_ip_blacklist.txt
