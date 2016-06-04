@@ -16,10 +16,10 @@ services:
      - query_ip_whitelist=/data/query_ip_whitelist.txt
      - query_ip_blacklist=/data/query_ip_blacklist.txt
   web:
-    image: nginx
+    build: web-server
     restart: always
     volumes:
-    - /data/ut2004/redirect:/usr/share/nginx/html:ro
+    - /data/ut2004/redirect:/usr/share/nginx/html/redirect:ro
     - /data/ut2004/demos:/usr/share/nginx/html/demos:ro
     - /data/download:/usr/share/nginx/html/download:ro
     ports:
