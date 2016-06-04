@@ -1,0 +1,44 @@
+version: '2'
+services:
+  teamspeak:
+    image: mbentley/teamspeak
+    restart: always
+    volumes:
+     - /data/teamspeak:/data
+     - /data/teamspeak/ts3server.sqlitedb:/opt/teamspeak/ts3server.sqlitedb
+    ports:
+     - 9987:9987/udp
+     - 30033:30033
+     - 10011:10011
+     - 41144:41144
+    environment:
+     - logpath=/data/logs/
+     - query_ip_whitelist=/data/query_ip_whitelist.txt
+     - query_ip_blacklist=/data/query_ip_blacklist.txt
+  web:
+    image: nginx
+    restart: always
+    volumes:
+    - /data/ut2004/redirect:/usr/share/nginx/html:ro
+    - /data/ut2004/demos:/usr/share/nginx/html/demos:ro
+    - /data/download:/usr/share/nginx/html/download:ro
+    ports:
+    - 80:80/tcp
+  ut2k4-ctf:
+    image: reflectivecode/ut2004
+    restart: always
+    volumes:
+    - /data/ut2004/conf:/usr/src/ut2004/System/conf
+    ports:
+     - 4444:4444/udp
+     - 44444:44444
+    command: ucc-bin server 'CTF-Grendelkeep.ut2?GameStats=True?AdminName=admin?AdminPassword=${ADMIN_PASSWORD}?GamePassword=${GAME_PASSWORD}?Mutator=XWeapons.MutNoSuperWeapon,XGame.MutNoAdrenaline,utcompv16a.MutUTComp' -nohomedir ini=conf/server-ctf.ini -log
+  ut2k4-tam:
+    image: reflectivecode/ut2004
+    restart: always
+    volumes:
+    - /data/ut2004/conf:/usr/src/ut2004/System/conf
+    ports:
+     - 5555:5555/udp
+     - 55555:55555
+    command: ucc-bin server 'DM-DE-Grendelkeep.ut2?GameStats=True?AdminName=admin?AdminPassword=${ADMIN_PASSWORD}?GamePassword=${GAME_PASSWORD}?Mutator=XWeapons.MutNoSuperWeapon,utcompv16a.MutUTComp' -nohomedir ini=conf/server-tam.ini -log
