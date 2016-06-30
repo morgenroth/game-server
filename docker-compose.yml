@@ -19,7 +19,7 @@ services:
     build: web-server
     restart: always
     volumes:
-    - /data/ut2004/Redirect:/usr/share/nginx/html/redirect:ro
+    - /data/ut2004/Web/Redirect:/usr/share/nginx/html/redirect:ro
     - /data/ut2004/Demos:/usr/share/nginx/html/demos:ro
     - /data/download:/usr/share/nginx/html/download:ro
     ports:

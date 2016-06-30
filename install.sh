@@ -17,7 +17,7 @@ chown -R 503:503 /data/teamspeak
 [ -e '/data/teamspeak/query_ip_blacklist.txt' ] || touch /data/teamspeak/query_ip_blacklist.txt
 
 # ut2004
-mkdir -p /data/ut2004/Redirect
+mkdir -p /data/ut2004/Web/Redirect
 mkdir -p /data/ut2004/Demos
 mkdir -p /data/ut2004/Conf
 cp server-*.ini /data/ut2004/Conf/
